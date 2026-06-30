@@ -1,10 +1,10 @@
 import sys
 from pathlib import Path
 sys.path.insert(0,'C:/Users/priti.kumari/Downloads/My_learning/hybrid-rag-system')
-from app.document_loader import load_pdf
-from app.chunker import chunk_text
-from app.embedding import get_embeddings
-from app.db_connect import get_connection
+from ingestion.document_loader import load_pdf
+from ingestion.chunker import chunk_text
+from ingestion.embedding import get_embeddings
+from database.db_connect import get_connection
 
 print("Loading documents...")
 

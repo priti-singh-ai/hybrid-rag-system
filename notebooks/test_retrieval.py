@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0,'C:/Users/priti.kumari/Downloads/My_learning/hybrid-rag-system')
-from app.vector_search import search_documents
+from retrieval.vector_search import search_documents
 
 query = "What does NVIDIA say about artificial intelligence?"
 

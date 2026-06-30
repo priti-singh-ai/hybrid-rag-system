@@ -1,5 +1,5 @@
-from app.document_loader import load_pdf
-from app.chunker import chunk_text
+from ingestion.document_loader import load_pdf
+from ingestion.chunker import chunk_text
 
 text = load_pdf("data/raw/NVIDIA-2025-Annual-Report.pdf")
 

@@ -1,22 +1,76 @@
-version: '3.8'
+version: "3.9"
 
 services:
 
   postgres:
+
     image: pgvector/pgvector:pg16
 
     container_name: pgvector-db
 
+    restart: always
+
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+
       POSTGRES_DB: ragdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
 
     ports:
+
       - "5432:5432"
 
     volumes:
+
       - postgres_data:/var/lib/postgresql/data
 
+  ollama:
+
+    image: ollama/ollama
+
+    container_name: ollama
+
+    restart: always
+
+    ports:
+
+      - "11434:11434"
+
+    volumes:
+
+      - ollama:/root/.ollama
+
+  fastapi:
+
+    build: .
+
+    container_name: rag-api
+
+    depends_on:
+
+      - postgres
+      - ollama
+
+    ports:
+
+      - "8000:8000"
+
+    environment:
+
+      POSTGRES_DB: ragdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+
+    volumes:
+
+      - .:/app
+
+    command: uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload
+
 volumes:
+
   postgres_data:
+
+  ollama:
